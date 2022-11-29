@@ -184,8 +184,15 @@ struct Flourish: ViewModifier {
 public extension View {
     
     /// Apply a Flourish animation to the view, triggered by a containing Flourish Group.
-    func flourish(animation: FlourishAnimation = Opacity()) -> some View {
-        modifier(Flourish(flourishAnimation: animation))
+    func flourish(
+        _ animation: FlourishAnimation = Opacity(),
+        delayIn: Double = 0,
+        delayOut: Double = 0
+    ) -> some View {
+        self
+            .modifier(Flourish(flourishAnimation: animation))
+            .delayFlourish(delayIn)
+            .delayWither(delayOut)
     }
     
     /// Apply asymmetric Flourish animations to the view, triggered by a containing Flourish Group.
@@ -202,9 +209,14 @@ public extension View {
     
     /// Apply parallel Flourish animations to the view, triggered by a containing Flourish Group.
     func flourish(
+        delayIn: Double = 0,
+        delayOut: Double = 0,
         @FlourishBuilder _ animations: () -> [any FlourishAnimation]
     ) -> some View {
-        modifier(Flourish(flourishAnimation: Parallel(animations)))
+        self
+            .modifier(Flourish(flourishAnimation: Parallel(animations)))
+            .delayFlourish(delayIn)
+            .delayWither(delayOut)
     }
     
     /// Apply sequenced Flourish animations to the view, triggered by a containing Flourish Group.
