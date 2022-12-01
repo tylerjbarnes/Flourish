@@ -221,10 +221,39 @@ public extension View {
             .delayWither(delayOut)
     }
     
+    /// Apply parallel asymmetric Flourish animations to the view, triggered by a containing Flourish Group.
+    func flourish(
+        delayIn: Double = 0,
+        delayOut: Double = 0,
+        @FlourishBuilder _ inAnimations: () -> [any FlourishAnimation],
+        @FlourishBuilder wither outAnimations: () -> [any FlourishAnimation]
+    ) -> some View {
+        self
+            .modifier(Flourish(
+                flourishAnimation: Parallel(inAnimations),
+                witherAnimation: Parallel(outAnimations)
+            ))
+            .delayFlourish(delayIn)
+            .delayWither(delayOut)
+    }
+    
     /// Apply sequenced Flourish animations to the view, triggered by a containing Flourish Group.
     func flourishSequence(
         @FlourishBuilder _ animations: () -> [any FlourishAnimation]
     ) -> some View {
         modifier(Flourish(flourishAnimation: Sequenced(animations)))
+    }
+    
+    /// Apply asymmetric sequenced Flourish animations to the view,
+    /// triggered by a containing Flourish Group.
+    func flourishSequence(
+        @FlourishBuilder _ inAnimations: () -> [any FlourishAnimation],
+        @FlourishBuilder wither outAnimations: (() -> [any FlourishAnimation])
+    ) -> some View {
+        self
+            .modifier(Flourish(
+                flourishAnimation: Sequenced(inAnimations),
+                witherAnimation: Sequenced(outAnimations)
+            ))
     }
 }
