@@ -160,7 +160,6 @@ struct Flourish: ViewModifier {
                 
                 // Define duration as remaining before the playhead
                 let triggerStart = trigger.time
-                let triggerEnd = triggerStart + trigger.duration
                 let duration = (flourishState.playhead - triggerStart)
                     .clamped(to: 0...trigger.duration)
                 
