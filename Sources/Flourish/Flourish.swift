@@ -41,8 +41,10 @@ struct Flourish: ViewModifier {
     
     // MARK: Duration Calculation
     
+    /// The total duration of flourish including delays.
     var flourishDuration: Double { delayFlourish + flourishAnimation.duration }
     
+    /// The total duration of wither including delays.
     var witherDuration: Double {
         (witherAnimation ?? flourishAnimation).duration + delayWither
     }
@@ -157,7 +159,7 @@ struct Flourish: ViewModifier {
             for trigger in triggers {
                 
                 // Define duration as remaining before the playhead
-                let triggerStart = trigger.time + delayWither
+                let triggerStart = trigger.time
                 let triggerEnd = triggerStart + trigger.duration
                 let duration = (flourishState.playhead - triggerStart)
                     .clamped(to: 0...trigger.duration)

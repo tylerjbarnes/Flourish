@@ -1,7 +1,7 @@
 /// Animates to zero translation along the x-axis.
 public struct TranslateX: FlourishAnimation, Retimeable {
     
-    /// The withered scale.
+    /// The withered translation.
     var translation: Double = 0
     
     /// The animation timing curve.
