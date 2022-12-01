@@ -164,9 +164,9 @@ struct Flourish: ViewModifier {
                 let duration = (flourishState.playhead - triggerStart)
                     .clamped(to: 0...trigger.duration)
                 
-                // Define delay as distance from trigger end to playhead
-                let delay = (flourishState.playhead - triggerEnd)
-                    .clamped(toAtLeast: 0)
+                // Define delay as simply the wither delay,
+                // effectively "re-justifying" animations to the timeline end
+                let delay = delayWither
 
                 // Apply the property changes with animation
                 withAnimation(
