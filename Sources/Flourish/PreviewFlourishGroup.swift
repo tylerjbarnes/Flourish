@@ -2,16 +2,20 @@ import SwiftUI
 
 /// An assembler that toggles assembly upon tap.
 public struct PreviewFlourishGroup<Content: View>: View {
-    
+
     /// The content for projection in the assembler.
     var content: Content
     
-    public init(@ViewBuilder _ content: () -> Content) {
+    public init(
+        isFlourishing: Bool = true,
+        @ViewBuilder _ content: () -> Content
+    ) {
         self.content = content()
+        _shouldFlourish = .init(initialValue: isFlourishing)
     }
     
     /// The state of assembly.
-    @State private var shouldFlourish = true
+    @State private var shouldFlourish: Bool
     
     public var body: some View {
         VStack {

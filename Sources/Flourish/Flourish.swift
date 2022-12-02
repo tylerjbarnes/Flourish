@@ -210,12 +210,15 @@ public extension View {
     
     /// Apply parallel Flourish animations to the view, triggered by a containing Flourish Group.
     func flourish(
+        _ timingCurve: TimingCurve = .standard,
         delayIn: Double = 0,
         delayOut: Double = 0,
         @FlourishBuilder _ animations: () -> [any FlourishAnimation]
     ) -> some View {
         self
-            .modifier(Flourish(flourishAnimation: Parallel(animations)))
+            .modifier(
+                Flourish(flourishAnimation: Parallel(timingCurve, animations))
+            )
             .delayFlourish(delayIn)
             .delayWither(delayOut)
     }

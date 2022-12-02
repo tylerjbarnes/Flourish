@@ -14,6 +14,7 @@ struct FlourishGroup: ViewModifier {
         _state = .init(
             initialValue: FlourishState(isFlourishing: isFlourishing)
         )
+        hostViewShouldExist = isFlourishing
     }
     
     func body(content: Content) -> some View {
@@ -35,7 +36,7 @@ struct FlourishGroup: ViewModifier {
     @State private var state: FlourishState
     
     /// The host view should be rendered into the hierarchy because it is not fully withered.
-    @State private var hostViewShouldExist = true
+    @State private var hostViewShouldExist: Bool
     
     /// Triggers the removal of the host view upon completion of withering.
     @State private var destructionTimer: Timer?
