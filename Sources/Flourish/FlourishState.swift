@@ -10,7 +10,7 @@ import SwiftUI
 struct FlourishState {
     
     /// The flourishes in the group should move to their flourished states.
-    var isFlourishing = false
+    var isFlourishing = true
     
     /// The number of seconds elapsed in the timeline from withered to flourished
     /// as recorded at the moment that `isFlourishing` changed.
